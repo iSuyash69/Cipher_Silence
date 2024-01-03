@@ -1,35 +1,37 @@
 //Initiate express server
-
 const express=require("express");
 const app=express();
 
 //Initiate mongoose
-
 const mongoose=require("mongoose");
-const listing = require("./models/listing");
 
+//Initiate CORS
 const cors=require("cors");
 app.use(cors());
-// Connect Mongoose to MongoDB database and start the express server on port 8080
 
-mongoose.connect("mongodb+srv://suyashdeshpande479:1234@cluster0.km1d9tu.mongodb.net/listings?retryWrites=true&w=majority")
-.then(()=>{
+//Setup ENV
+require('dotenv').config();
+
+//Setup middleware
+app.use(express.json());
+
+// Connect Mongoose to MongoDB database and start the express server on port 8080
+mongoose.connect(process.env.MONGODB_URI)
+    .then(()=>{
     console.log("connected to MongoDB");
     app.listen(8080,()=>{
         console.log("server is listening at port 8080");
+        });
+    })
+    .catch((err)=>{console.log(err);
     });
-})
-.catch((err)=>{console.log(err);});
+
+//Import Models 
+const listing = require("./models/listing");
  
-// middleware
-
-app.use(express.json());
-
 // routes 
 
-
 // GET Method (Fetch): 
-
 app.get("/listings",(req,res)=>{
     listing.find()
         .then((listing)=>{
@@ -42,8 +44,7 @@ app.get("/listings",(req,res)=>{
         });
 });
 
-// Fetch By params :
-
+// GET By params :
 app.get("/listings/:location",(req,res)=>{
     const {location}=req.params;
     listing.find({location:location})
@@ -63,7 +64,6 @@ app.get("/listings/:location",(req,res)=>{
 });
 
 // POST Method :
-
 app.post("/listings",(req,res)=>{
     listing.create(req.body)
         .then(()=>{
@@ -77,7 +77,6 @@ app.post("/listings",(req,res)=>{
 });
 
 // DELETE Method :
-
 app.delete("/listings/:location",(req,res)=>{
     const {location}=req.params;
     listing.deleteMany({location:location})
@@ -90,4 +89,6 @@ app.delete("/listings/:location",(req,res)=>{
         res.status(500).json({error:"Internal Server Error"});
     });
 });
+
+
 

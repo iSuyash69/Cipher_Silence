@@ -1,8 +1,9 @@
 const mongoose=require("mongoose");
 const initData=require("./data");
 const Listing=require("../models/listing");
+require('dotenv').config();
 
-mongoose.connect("mongodb+srv://suyashdeshpande479:1234@cluster0.km1d9tu.mongodb.net/listings?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGODB_URI)
 .then(()=>{
     console.log("connected to MongoDB");
 })
