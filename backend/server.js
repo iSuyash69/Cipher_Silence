@@ -7,13 +7,12 @@ const mongoose=require("mongoose");
 
 //Initiate CORS
 const cors=require("cors");
-app.use(cors());
+
+//Initiate Morgan Middleware
+const morgan=require("morgan"); 
 
 //Setup ENV
 require('dotenv').config();
-
-//Setup middleware
-app.use(express.json());
 
 // Connect Mongoose to MongoDB database and start the express server on port 8080
 mongoose.connect(process.env.MONGODB_URI)
@@ -29,7 +28,17 @@ mongoose.connect(process.env.MONGODB_URI)
 //Import Models 
 const listing = require("./models/listing");
  
-// routes 
+//Setup CORS Middleware
+app.use(cors());
+
+//Setup Parsing incoming requests in middleware
+app.use(express.json());
+
+//Setup Morgan - Logger Middleware
+// app.use(morgan("combined"));y
+
+
+// ---------------------- routes ------------------------ 
 
 // GET Method (Fetch): 
 app.get("/listings",(req,res)=>{
