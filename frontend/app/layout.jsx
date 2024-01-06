@@ -1,5 +1,6 @@
 import Navbar from '@components/commom/navbar/Navbar';
 import '@styles/globals.css'
+import { Toaster } from 'sonner';
 
 export const metadata={
     title:"Airbnb",
@@ -13,6 +14,7 @@ const RootLayout=({children})=>{
                 <div className='flex flex-col min-h-screen w-full'>
                     <Navbar/>
                     <div>{children}</div>
+                    <Toaster position='top-right' richColors/>
                 </div>
             </body>
         </html>

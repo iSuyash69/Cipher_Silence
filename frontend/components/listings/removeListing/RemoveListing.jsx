@@ -2,6 +2,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { toast } from "sonner";
 
 const RemoveListing=({setRemoveForm})=>{
 
@@ -36,10 +37,11 @@ const RemoveListing=({setRemoveForm})=>{
             .then((response)=>{
                 console.log(response.data);
                 action.resetForm();
-                setRemoveForm(false);
+                toast.success("Listing Deleted Successfully");
             })
             .catch((err)=>{
                 console.log("Post request failed");
+                toast.error("Something went wrong");
             });
         },
     });
