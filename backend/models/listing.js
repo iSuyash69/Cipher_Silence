@@ -9,7 +9,8 @@ const listingSchema=new mongoose.Schema({
     image:{
         filename: {
           type: String,
-          required: true
+          required: true,
+          default: 'image'
         },
         url: {
           type: String,

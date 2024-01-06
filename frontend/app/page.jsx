@@ -1,6 +1,6 @@
 import Listings from "@components/listings/Listings";
 
-const Home=()=>{
+const Page=()=>{
     return(
         <div className="w-full">
             <Listings/>
@@ -8,4 +8,4 @@ const Home=()=>{
     );
 }
 
-export default Home;
+export default Page;

@@ -86,12 +86,12 @@ app.post("/listings",(req,res)=>{
 });
 
 // DELETE Method :
-app.delete("/listings/:location",(req,res)=>{
-    const {location}=req.params;
-    listing.deleteMany({location:location})
+app.delete("/listings/:title",(req,res)=>{
+    const {title}=req.params;
+    listing.deleteMany({title:title})
     .then(()=>{
-        res.status(200).json({status:`Data of ${location} deleted successfully`});
-        console.log(`Data of ${location} deleted successfully`);
+        res.status(200).json({status:`${title} Listing deleted successfully`});
+        console.log(`${title} Listing deleted successfully`);
     })
     .catch((error)=>{
         console.log(error);
