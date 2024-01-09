@@ -46,7 +46,7 @@ const Form=()=>{
     });
 
     return(
-        <div className="absolute mt-8  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
+        <div style={{height:'calc(100vh - 64px'}} className="absolute mt-8 w-full bg- top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
             <form onSubmit={handleSubmit} style={{maxHeight:'90vh',overflow:'auto'}} className="flex shadow-lg ring-2 ring-pink-100  shadow-pink-300/50 text-black scrollbar-style relative py-5 px-16 bg-gray-100 rounded-xl flex-col">
                 <h3 className="text-2xl m-auto font-semibold   mb-9">Add New Listing</h3>
                 <div className="mb-4 flex gap-8 m-auto">

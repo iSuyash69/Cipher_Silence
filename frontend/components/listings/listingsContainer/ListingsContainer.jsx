@@ -1,7 +1,7 @@
 "use client"
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ListingCard from "./listingCard/ListingCard";
+import ListingCard from "../listingCard/ListingCard";
 
 const Listings=()=>{
 
@@ -32,7 +32,7 @@ const Listings=()=>{
     }
 
     return(
-        <div className="flex gap-8 w-full px-10 mt-24 flex-wrap justify-center">
+        <div className="flex gap-8 w-full px-10 mt-10 mb-12 flex-wrap justify-center">
             {listingsData.map((card,key)=>{
                 return <ListingCard card={card} key={key}/>
             })}

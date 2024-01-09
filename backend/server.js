@@ -54,16 +54,17 @@ app.get("/listings",(req,res)=>{
 });
 
 // GET By params :
-app.get("/listings/:location",(req,res)=>{
-    const {location}=req.params;
-    listing.find({location:location})
+app.get("/listings/:title",(req,res)=>{
+    const {title}=req.params;
+    listing.find({title:title})
         .then((foundListing)=>{
             if(foundListing.length==0){
                 res.send("No data found");
+                console.log(`${title} data not found`);
             }
             else{
                 res.status(200).json(foundListing);
-                console.log(`${location} data sent successfully`);
+                console.log(`${title} data sent successfully`);
             }
         })
         .catch((error)=>{
@@ -100,4 +101,10 @@ app.delete("/listings/:title",(req,res)=>{
 });
 
 
+// --------- Reviews Route -----------
 
+//POST Route :
+
+// app.post("/listings/:title/reviews",(req,res)=>{
+//     const title=
+// })
