@@ -26,7 +26,9 @@ mongoose.connect(process.env.MONGODB_URI)
     });
 
 //Import Models 
-const listing = require("./models/listing");
+const Listing=require("./models/listing");
+const Review=require("./models/review");
+
  
 //Setup CORS Middleware
 app.use(cors());
@@ -42,7 +44,7 @@ app.use(express.json());
 
 // GET Method (Fetch): 
 app.get("/listings",(req,res)=>{
-    listing.find()
+    Listing.find()
         .then((listing)=>{
             res.status(200).json(listing);
             console.log("listings data sent successfully");
@@ -56,7 +58,7 @@ app.get("/listings",(req,res)=>{
 // GET By params :
 app.get("/listings/:title",(req,res)=>{
     const {title}=req.params;
-    listing.find({title:title})
+    Listing.find({title:title}).populate('reviews')
         .then((foundListing)=>{
             if(foundListing.length==0){
                 res.send("No data found");
@@ -73,23 +75,23 @@ app.get("/listings/:title",(req,res)=>{
         });
 });
 
-// POST Method :
-app.post("/listings",(req,res)=>{
-    listing.create(req.body)
-        .then(()=>{
-            res.status(200).json({success:"Data sent successfully"});
-            console.log("listings data received successfully");
-        })
-        .catch((error)=>{
-            console.log(error);
-            res.status(500).json({error:"Internal Server Error"});
-        });
-});
+// // POST Method :
+// app.post("/listings",(req,res)=>{
+//     listing.create(req.body)
+//         .then(()=>{
+//             res.status(200).json({success:"Data sent successfully"});
+//             console.log("listings data received successfully");
+//         })
+//         .catch((error)=>{
+//             console.log(error);
+//             res.status(500).json({error:"Internal Server Error"});
+//         });
+// });
 
 // DELETE Method :
 app.delete("/listings/:title",(req,res)=>{
     const {title}=req.params;
-    listing.deleteMany({title:title})
+    Listing.deleteMany({title:title})
     .then(()=>{
         res.status(200).json({status:`${title} Listing deleted successfully`});
         console.log(`${title} Listing deleted successfully`);
@@ -103,8 +105,29 @@ app.delete("/listings/:title",(req,res)=>{
 
 // --------- Reviews Route -----------
 
-//POST Route :
+// POST Route :
 
-// app.post("/listings/:title/reviews",(req,res)=>{
-//     const title=
-// })
+app.post("/listings/:title/reviews",async (req,res)=>{
+    try{
+        const title=req.params.title;
+        const newReview=req.body;
+
+        const listing= await Listing.findOne({title:title});
+
+        if(!listing){
+            return res.status(404).json({ error: 'Listing not found' });
+        }
+
+        const addedReview=new Review(newReview);
+        await addedReview.save();
+
+        await listing.updateOne({$push:{reviews:addedReview._id}});
+
+        res.status(200).json({ message: 'Review submitted successfully' });
+        console.log(title,newReview);
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    };
+});

@@ -1,7 +1,9 @@
 const mongoose=require("mongoose");
 
 const reviewSchema=new mongoose.Schema({
-    comment:String,
+    comment:{
+        type:String,
+    },
     rating:{
         type:Number,
         min:1,

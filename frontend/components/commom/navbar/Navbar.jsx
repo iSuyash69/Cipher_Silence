@@ -46,18 +46,18 @@ import browser from "../../../assets/images/Vector.png";
 const Navbar=()=>{
 
     return(
-        <div className="w-full fixed flex py-2 z-10 bg-[#C50042] items-center justify-between px-14">
-            <div className="h-16">
+        <div className="w-full fixed flex py-2 z-10  bg-[#C50042] items-center justify-between px-14">
+            <div className="h-[68px]">
                 <Image className="w-full object-cover h-full" src={logo}></Image>
             </div>
             <ul className="flex items-center gap-4">
-                <li className="h-7"><Image className="w-full h-full" src={pict}></Image></li>
-                <li className="h-7"><Image className="w-full h-full"  src={ar}></Image></li>
-                <li className="h-5"><Image className="w-full h-full"  src={browser}></Image></li>
-                <li className="h-5 "><Image className="w-full h-full"  src={bellicon}></Image></li>
-                <div className="flex  ml-1 items-center bg-white p-1 gap-1 pl-2 border rounded-full">
+                <li className="h-8 mb-1"><Image className="w-full h-full" src={pict}></Image></li>
+                <li className="h-8 mb-1"><Image className="w-full h-full"  src={ar}></Image></li>
+                <li className="h-6"><Image className="w-full h-full"  src={browser}></Image></li>
+                <li className="h-6 "><Image className="w-full h-full"  src={bellicon}></Image></li>
+                <div className="flex hover:bg-gray-300 cursor-pointer  ml-1 items-center bg-white p-1 gap-1 pl-2 border rounded-full">
                     <li className="h-5 w-6"><Image className="w-full h-full object-cover" src={hamburgerMenu}></Image></li>
-                    <li className="h-8"><Image className="w-full h-full object-cover"  src={profilePic}></Image></li>
+                    <li className="h-9"><Image className="w-full h-full object-cover"  src={profilePic}></Image></li>
                 </div>
             </ul>
         </div>
