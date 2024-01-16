@@ -25,7 +25,7 @@ const Listings=()=>{
 
     if(listingsData.length==0){
         return(
-            <div className="flex w-full h-screen items-center justify-center">
+            <div style={{height:'calc(100vh - 352px)'}} className="flex w-full  items-center justify-center">
                 <h1 className="text-xl font-semibold">Loading....</h1>
             </div>
         );
