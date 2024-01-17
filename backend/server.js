@@ -32,6 +32,7 @@ mongoose.connect(process.env.MONGODB_URI)
 //Import Routes
 const listings=require("./routes/listing");
 const review=require("./routes/review");
+const user=require("./routes/user");
 
 //Setup CORS Middleware
 app.use(cors());
@@ -47,6 +48,6 @@ app.use(express.json());
 
 app.use("/listings",listings);
 app.use("/listings/:title/reviews",review);
-
+app.use("/user",user);
 
 
