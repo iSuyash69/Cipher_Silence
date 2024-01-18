@@ -2,37 +2,15 @@
 const express=require("express");
 const app=express();
 
-//Initiate mongoose
-const mongoose=require("mongoose");
-
 //Initiate CORS
 const cors=require("cors");
-
-//Initiate Morgan Middleware
-// const morgan=require("morgan"); 
    
 //Setup ENV
 require('dotenv').config();
 
-// Connect Mongoose to MongoDB database and start the express server on port 8080
-mongoose.connect(process.env.MONGODB_URI)
-    .then(()=>{
-    console.log("connected to MongoDB");
-    app.listen(8080,()=>{
-        console.log("server is listening at port 8080");
-        });
-    })
-    .catch((err)=>{console.log(err);
-    });
-
-    // app.listen(8080,()=>{
-    //     console.log("server is listening at port 8080");
-    //     });
-
-//Import Routes
-const listings=require("./routes/listing");
-const review=require("./routes/review");
-const user=require("./routes/user");
+//Connect Mongoose to MongoDB database and start the express server on port 8080
+const connectToMongoDB=require("./adapters/mongodb.adapter");
+connectToMongoDB();
 
 //Setup CORS Middleware
 app.use(cors());
@@ -40,8 +18,13 @@ app.use(cors());
 //Setup Parsing incoming requests in middleware
 app.use(express.json());
 
-//Setup Morgan - Logger Middleware
-// app.use(morgan("combined"));y
+//Initiate port 
+const port=process.env.PORT || 5000;
+
+//Import Routes
+const listings=require("./routes/Listing.routes");
+const review=require("./routes/Review.routes");
+const user=require("./routes/User.routes");
 
 
 // ---------------------- routes ------------------------ 
@@ -49,5 +32,9 @@ app.use(express.json());
 app.use("/listings",listings);
 app.use("/listings/:title/reviews",review);
 app.use("/user",user);
+
+app.listen(port,()=>{
+    console.log(`server is listening at port ${port}`);
+});
 
 
