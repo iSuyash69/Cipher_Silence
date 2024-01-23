@@ -65,7 +65,7 @@ const RegisterForm=()=> {
             <label class="block mb-2 text-sm font-medium ">Confirm Password</label>
             <input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password"  placeholder="••••••••" class=" sm:text-sm rounded-lg bg-gray-100 text-black border-gray-300 border block w-full p-2.5 bg-[#ffffffbd]" required="" />
           </div>
-          <button onClick={handleSubmit} class="w-full text-white font-semibold  hover:bg-red-600 bg-red-500 rounded-lg text-sm px-5 py-2.5 text-center ">Sign in</button>
+          <button onClick={handleSubmit} class="w-full text-white font-semibold  hover:bg-red-600 bg-red-500 rounded-lg text-sm px-5 py-2.5 text-center ">Create Account</button>
           {error && (
           <div className="bg-red-600 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
               {error}

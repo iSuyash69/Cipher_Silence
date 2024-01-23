@@ -1,4 +1,4 @@
-const { default: LoginForm } = require("@components/auth/loginForm/LoginForm");
+import LoginForm from "@components/auth/loginForm/LoginForm";
 
 const Page=()=>{
     return(

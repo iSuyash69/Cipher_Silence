@@ -38,3 +38,10 @@ app.listen(port,()=>{
 });
 
 
+
+
+// const crypto = require('crypto');
+// const jwtSecretKey = crypto.randomBytes(32).toString('hex');
+// console.log(jwtSecretKey);
+
+

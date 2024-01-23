@@ -21,6 +21,7 @@ const Form=()=>{
         initialValues:initialValues,
         validationSchema:validationSchema,
         onSubmit:(values,action)=>{
+
             const formattedData={
                 title:values.title,
                 description:values.description,
@@ -31,7 +32,9 @@ const Form=()=>{
                 location:values.location,
                 country:values.country,
             };
+
             console.log(formattedData);
+            
             axios.post(`${baseUrl}/listings`,formattedData)
             .then((response)=>{
                 console.log(response.data);

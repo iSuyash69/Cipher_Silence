@@ -1,16 +1,28 @@
 "use client"
 import axios from "axios";
+import Cookies from "js-cookie";
 import Link from "next/link";
-import { Router } from "next/router";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const LoginForm=()=> {
    
   const baseUrl=process.env.NEXT_PUBLIC_BASE_API_URL;
 
+  const router=useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  useEffect(()=>{
+    const token=Cookies.get('token');
+
+    if(token){
+      router.push("/");
+    }
+
+  },[]);
 
   const handleSubmit=(e)=>{
 
@@ -25,11 +37,13 @@ const LoginForm=()=> {
       axios.post(`${baseUrl}/user/login`,{email,password})
       .then((response)=>{
         console.log(response.data.message);
+        const token=response.data.token;
+        Cookies.set('token',token,{expires:7});
+        router.push("/");
       })
       .catch(()=>{
-        setError("Something went wrong");
+        setError("Authentication failed");
       });
-
     }
   };
 
