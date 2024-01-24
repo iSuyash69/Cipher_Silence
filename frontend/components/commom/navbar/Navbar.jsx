@@ -51,9 +51,7 @@ const Navbar=()=>{
                 <Image className="w-full object-cover h-full" src={logo}></Image>
             </div>
             <ul className="flex items-center gap-4">
-                <li className="h-8 mb-1"><Image className="w-full h-full" src={pict}></Image></li>
-                <li className="h-8 mb-1"><Image className="w-full h-full"  src={ar}></Image></li>
-                <li className="h-6"><Image className="w-full h-full"  src={browser}></Image></li>
+                <li className="text-lg font-medium text-white">Hello, Guest</li>
                 <li className="h-6 "><Image className="w-full h-full"  src={bellicon}></Image></li>
                 <div className="flex hover:bg-gray-300 cursor-pointer  ml-1 items-center bg-white p-1 gap-1 pl-2 border rounded-full">
                     <li className="h-5 w-6"><Image className="w-full h-full object-cover" src={hamburgerMenu}></Image></li>

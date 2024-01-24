@@ -4,7 +4,7 @@ import Listings from "@components/listings/listingsContainer/ListingsContainer";
 import SearchBar from "@components/searchbar/SearchBar";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Page=()=>{
 
@@ -15,11 +15,7 @@ const Page=()=>{
         const token=Cookies.get('token');
         
         if(token){
-            axios.post(`${baseUrl}/user/verify`,{},{
-                headers:{
-                    'Authorization':token
-                }
-            })
+            axios.post(`${baseUrl}/user/verify`,{},{headers:{'Authorization':token}})
             .then((response)=>{
                 console.log(response.data);
             })
@@ -29,7 +25,7 @@ const Page=()=>{
         }
 
     },[]);
-
+    
     return(
         <div>
             <div>
